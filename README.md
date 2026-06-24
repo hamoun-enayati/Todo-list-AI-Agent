@@ -4,8 +4,8 @@ A personal productivity assistant powered by an LLM agent.
 
 ## Features 
 
-✅ Read todo list
-✅ Add tasks
+-✅ Read todo list
+-✅ Add tasks
 ✅ Edit tasks
 ✅ Remove tasks
 ✅ Mark tasks as completed
