@@ -13,26 +13,50 @@ def read_todos():
             if line.strip
         ]
 
-
-@tool
+@tool 
 def add_task(task: str):
     """
-    Adds a new task to the to-do list.
+    Adds a single task to the to-do list
     """
-    task = task.strip()
+    try:
+            task = task.strip()
 
-    if task == "":
-        return "Cannot add an empty task."
-        
-    with open("todo.txt", "r") as file:
-        tasks = file.readlines()
+            if task == "":
+                return "Cannot add an empty task."
+                
+            with open("todo.txt", "r") as file:
+                tasks = file.readlines()
 
-    i = len(tasks)+1
+            i = len(tasks)+1
 
-    with open("todo.txt", "a") as file:
-        file.write(f"[{i}] " + task + '\n')
-
+            with open("todo.txt", "a") as file:
+                file.write(f"[{i}] " + task + '\n')
+    except Exception as e:
+            return e
     return "Task added."
+
+@tool
+def add_tasks(tasks: list[str]):
+    """
+    Adds tasks to the to-do list.
+    """
+    for task in tasks:
+        try:
+            task = task.strip()
+
+            if task == "":
+                return "Cannot add an empty task."
+                
+            with open("todo.txt", "r") as file:
+                existing_tasks = file.readlines()
+
+            i = len(existing_tasks)+1
+
+            with open("todo.txt", "a") as file:
+                file.write(f"[{i}] " + task + '\n')
+        except Exception as e:
+            return e
+    return "Tasks added."
 
 
 

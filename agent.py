@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from dotenv import load_dotenv
-from tools import read_todos, add_task, mark_done, remove_task, edit_task
+from tools import read_todos, add_task, add_tasks, mark_done, remove_task, edit_task
 import os
 
 load_dotenv()
@@ -37,16 +37,33 @@ def make_agent():
         3. Modifying tasks:
         - Never add, edit, remove, or complete tasks unless the user explicitly requests it.
         - Do not modify tasks based on suggestions, thoughts, or mentions.
+        
+        4. Adding a Single task
+        -When the user wants to add a single task, call add_task tool. 
+        
+        5. Adding Multiple tasks:
+        - When the user wants to add multiple tasks, first separate them. Then ask the user for 
+          confirmation to add the tasks.
+        -Example:
+            User: I need to do task1, task2, task3,...
+            You should say:
+                I found the following tasks in your prompt:
+                -task1
+                -task2
+                .
+                .
+                .
+                Should I add them to your list?
 
-        4. Multiple tasks:
-        - If the user provides multiple separate tasks in one message:
-        - Do NOT call add_task.
-        - Ask the user to provide only one task.
+            If the user confirms, agrees, or gives approval:
+            -Put all tasks inside a list, named tasks.
+            -Then call add_tasks tool with that list.
+            -Otherwise, ask what the user would like to do next.
 
-        5. Preserve user intent:
+        6. Preserve user intent:
         - Do not rewrite or change task descriptions unless the user asks.
         - Keep task wording as close as possible to the user's wording.
-
+         
     """)
 
     return agent
