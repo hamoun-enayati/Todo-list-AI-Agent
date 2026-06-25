@@ -20,4 +20,12 @@ User ➡ AI Agent ➡ Tools ➡ todo.txt
 
 ##
 
-I made this project as my first exploration of AI agents
+How to use:
+- Install vs code or an IDE of your choice.
+- Install python
+- Install langchain (pip install langchain on cmd)
+- edit .env.example:
+-   Pick a model, get an api key and base url.
+-   past them in .env.example file
+-   run main.py
+-   enjoy!
